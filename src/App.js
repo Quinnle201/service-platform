@@ -1,17 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import NavigationBar from "./components/Navbar";
 
 function App() {
   return (
-    <BrowserRouter>
-      <NavigationBar />
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin" element={<Dashboard />} /> {/* changed from /dashboard */}
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

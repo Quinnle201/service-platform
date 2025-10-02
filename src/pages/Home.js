@@ -1,98 +1,205 @@
 import { useState } from "react";
-import { Container, Row, Col, Card, Button, Form, Carousel } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Form, Carousel, Modal } from "react-bootstrap";
 import axios from "axios";
+import "../styles/Home.css";
+import Navbar from "../components/Navbar";
+import logo2 from "../assets/logo2.png";
+import hero1 from "../assets/professional-cleaning-service-people-working-together-office.jpg";
+import hero2 from "../assets/desktop-wallpaper-floor-cleaning-tips-for-covid-19-carpets-hardwood-vinyl-flooring-cleaning-service.jpg";
+import hero3 from "../assets/still-life-office-cleaning-process.jpg";
+import homeImg from "../assets/Professional-House-Cleaning-Services-in-North-Ogden-Utah.jpg";
+import carpetImg from "../assets/Deep-cleaning-carpet-1.jpg";
+import windowImg from "../assets/5-Cleaning-Tips-to-Make-Your-Windows-Sparkle-This-Spring-Featured.jpeg.jpeg";
+import before1 from "../assets/before1.png";
+import after1 from "../assets/after1.png";
+import before2 from "../assets/before2.png";
+import after2 from "../assets/after2.png";
 
 export default function Home() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [quote, setQuote] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImg, setCurrentImg] = useState({ before: "", after: "" });
 
-  const handleSubmit = async (e) => {
+  const heroImages = [hero1, hero2, hero3];
+  const services = [
+    { title: "Home Cleaning", description: "Full house cleaning service", img: homeImg },
+    { title: "Carpet Cleaning", description: "Deep carpet cleaning", img: carpetImg },
+    { title: "Window Cleaning", description: "Sparkling clean windows", img: windowImg },
+  ];
+  const galleryImages = [
+    { before: before1, after: after1 },
+    { before: before2, after: after2 },
+  ];
+
+  const handleQuoteSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/inquiries", form);
-      alert("Inquiry sent!");
-      setForm({ name: "", email: "", phone: "", message: "" });
+      await axios.post("http://localhost:5000/api/inquiries", quote);
+      alert("Quote request sent!");
+      setQuote({ name: "", email: "", phone: "", service: "", message: "" });
     } catch (err) {
       console.error(err);
-      alert("Error sending inquiry.");
+      alert("Error sending quote request.");
     }
   };
 
-  const services = [
-    { title: "Home Cleaning", description: "Full house cleaning service", img: "https://source.unsplash.com/400x300/?cleaning,home" },
-    { title: "Carpet Cleaning", description: "Deep carpet cleaning and stain removal", img: "https://source.unsplash.com/400x300/?carpet,cleaning" },
-    { title: "Window Cleaning", description: "Sparkling clean windows", img: "https://source.unsplash.com/400x300/?window,cleaning" }
-  ];
-
-  const heroImages = [
-    "https://source.unsplash.com/1200x400/?cleaning,house",
-    "https://source.unsplash.com/1200x400/?cleaning,room",
-    "https://source.unsplash.com/1200x400/?cleaning,work"
-  ];
-
   return (
     <>
+     <Navbar />
       {/* Hero Carousel */}
-      <Carousel fade>
+      <Carousel fade controls indicators interval={3000} pause="hover">
         {heroImages.map((img, idx) => (
           <Carousel.Item key={idx}>
-            <img className="d-block w-100" src={img} alt={`Slide ${idx}`} />
+            <img className="d-block w-100 hero-img" src={img} alt={`Slide ${idx}`} />
             <Carousel.Caption>
-              <h1 className="fw-bold">Professional Cleaning Services</h1>
-              <p>Making your home sparkling clean every day!</p>
+              <h1 className="fw-bold text-warning animate__animated animate__fadeInDown">
+                Professional Cleaning Services
+              </h1>
+              <p className="text-white animate__animated animate__fadeInUp">
+                Reliable, Affordable, Sparkling Clean
+              </p>
+              <Button variant="warning" className="me-2 shadow-sm">
+                Get Quote
+              </Button>
+              <Button variant="outline-light" className="shadow-sm">
+                View Services
+              </Button>
             </Carousel.Caption>
           </Carousel.Item>
         ))}
       </Carousel>
 
-      <Container className="mt-5">
-        <h2 className="text-center mb-4" style={{color:"#4B0082"}}>Our Services</h2>
+      <Container id="services" className="mt-5">
+        {/* Services Section */}
+        <h2 className="text-center mb-4" style={{ color: "#8B4513" }}>Our Services</h2>
         <Row>
           {services.map((s, idx) => (
             <Col md={4} key={idx} className="mb-4">
-              <Card className="shadow-sm h-100">
-                <Card.Img variant="top" src={s.img} />
+              <Card className="shadow-sm h-100 card-hover">
+                <Card.Img variant="top" src={s.img} className="card-img-hover" />
                 <Card.Body>
-                  <Card.Title>{s.title}</Card.Title>
+                  <Card.Title style={{ color: "#d17e1f" }}>{s.title}</Card.Title>
                   <Card.Text>{s.description}</Card.Text>
-                  <Button variant="primary">Learn More</Button>
+                  <Button style={{ backgroundColor: "#8B4513", border: "none" }} className="w-100">
+                    Learn More
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>
           ))}
         </Row>
 
-        <h2 className="text-center mt-5 mb-4" style={{color:"#4B0082"}}>Contact Us</h2>
-        <Row>
-          <Col md={6} className="mx-auto">
-            <Form onSubmit={handleSubmit} className="p-4 shadow-sm rounded bg-white">
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" value={form.name} required
-                  onChange={e => setForm({...form, name: e.target.value})} />
-              </Form.Group>
+        {/* Gallery Carousel */}
+        <h2 className="text-center mt-5 mb-4" style={{ color: "#8B4513" }}>Before & After</h2>
+        <Carousel fade interval={3000} pause="hover" className="before-after-carousel">
+          {galleryImages.map((img, idx) => (
+            <Carousel.Item key={idx}>
+              <div className="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+                <div className="carousel-img-wrapper">
+                  <img src={img.before} className="carousel-img" alt={`Before ${idx}`} />
+                  <p className="text-center mt-2 mb-0">Before</p>
+                </div>
+                <div className="carousel-img-wrapper">
+                  <img src={img.after} className="carousel-img" alt={`After ${idx}`} />
+                  <p className="text-center mt-2 mb-0">After</p>
+                </div>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={form.email} required
-                  onChange={e => setForm({...form, email: e.target.value})} />
-              </Form.Group>
+        {/* Lightbox */}
+        <Modal show={lightboxOpen} onHide={() => setLightboxOpen(false)} size="lg" centered>
+          <Modal.Body>
+            <Row>
+              <Col>
+                <h5 className="text-center">Before</h5>
+                <img src={currentImg.before} className="img-fluid rounded" />
+              </Col>
+              <Col>
+                <h5 className="text-center">After</h5>
+                <img src={currentImg.after} className="img-fluid rounded" />
+              </Col>
+            </Row>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setLightboxOpen(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Phone</Form.Label>
-                <Form.Control type="text" value={form.phone} required
-                  onChange={e => setForm({...form, phone: e.target.value})} />
-              </Form.Group>
+        {/* Get Quote Section */}
+        <Container id="quote" className="mt-5 mb-5">
+          <Row className="align-items-center shadow-sm p-4 rounded" style={{ backgroundColor: "#FFF8DC" }}>
+            <Col md={6} className="text-center mb-4 mb-md-0">
+              <img src={logo2} alt="Logo" className="mb-3" style={{ width: "120px" }} />
+              <h2 style={{ color: "#8B4513" }}>Want a Sparkling Clean Home?</h2>
+              <p style={{ color: "#556B2F" }}>
+                Let's get started today! Fill out the form and our experts will provide a free estimate. Reliable, fast, and affordable!
+              </p>
+            </Col>
+            <Col md={6}>
+              <Form onSubmit={handleQuoteSubmit} className="p-4 rounded bg-white shadow-sm">
+                <Form.Group className="mb-3">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control type="text" value={quote.name} required onChange={(e) => setQuote({ ...quote, name: e.target.value })} />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" value={quote.email} required onChange={(e) => setQuote({ ...quote, email: e.target.value })} />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Phone</Form.Label>
+                  <Form.Control type="text" value={quote.phone} required onChange={(e) => setQuote({ ...quote, phone: e.target.value })} />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Service</Form.Label>
+                  <Form.Select value={quote.service} onChange={(e) => setQuote({ ...quote, service: e.target.value })}>
+                    <option value="">Select Service</option>
+                    {services.map((s, i) => (
+                      <option key={i} value={s.title}>{s.title}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Message</Form.Label>
+                  <Form.Control as="textarea" rows={3} value={quote.message} required onChange={(e) => setQuote({ ...quote, message: e.target.value })} />
+                </Form.Group>
+                <Button type="submit" style={{ backgroundColor: "#d17e1f", border: "none" }} className="w-100 shadow-sm">Request Quote</Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Message</Form.Label>
-                <Form.Control as="textarea" rows={3} value={form.message} required
-                  onChange={e => setForm({...form, message: e.target.value})} />
-              </Form.Group>
-
-              <Button type="submit" className="w-100" style={{background:"#4B0082", border:"none"}}>Send Inquiry</Button>
-            </Form>
-          </Col>
-        </Row>
+        {/* Location */}
+        <Container id="location" className="mb-5">
+          <h2 className="text-center mb-5" style={{ color: "#8B4513" }}>Our Location</h2>
+          <Row>
+            <Col md={6} style={{ color: "#556B2F" }}>
+              <p>675 Town Square Blvd, suite 200, Building 1A, Garland, TX. USA</p>
+              <p>Email: <a href="mailto:info@alimaid.com">info@alimaid.com</a></p>
+              <p>Phone: <a href="tel:+14694652141">+1 (469) 465-2141</a></p>
+            </Col>
+            <Col md={6}>
+              <iframe
+                title="WeClean Location"
+                src="https://www.google.com/maps?q=675+Town+Square+Blvd,+Garland,+TX&output=embed"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
+            </Col>
+          </Row>
+        </Container>
       </Container>
     </>
   );
