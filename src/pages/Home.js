@@ -24,8 +24,6 @@ export default function Home() {
     message: "",
   });
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImg, setCurrentImg] = useState({ before: "", after: "" });
-
   const heroImages = [hero1, hero2, hero3];
   const services = [
     { title: "Home Cleaning", description: "Full house cleaning service", img: homeImg },
@@ -120,11 +118,9 @@ export default function Home() {
             <Row>
               <Col>
                 <h5 className="text-center">Before</h5>
-                <img src={currentImg.before} className="img-fluid rounded" />
               </Col>
               <Col>
                 <h5 className="text-center">After</h5>
-                <img src={currentImg.after} className="img-fluid rounded" />
               </Col>
             </Row>
           </Modal.Body>
