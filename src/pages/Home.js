@@ -399,17 +399,22 @@ export default function Home() {
               <Col md={4} className="mb-4">
                 <h5 className="fw-bold text-warning">Follow Us</h5>
                 <div>
-                  <a href="#" className="text-white me-3 fs-4">
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white me-3 fs-4"
+                  >
                     <i className="bi bi-facebook"></i>
                   </a>
-                  <a href="#" className="text-white me-3 fs-4">
+
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white me-3 fs-4"
+                  >
                     <i className="bi bi-instagram"></i>
-                  </a>
-                  <a href="#" className="text-white me-3 fs-4">
-                    <i className="bi bi-twitter-x"></i>
-                  </a>
-                  <a href="#" className="text-white fs-4">
-                    <i className="bi bi-linkedin"></i>
                   </a>
                 </div>
               </Col>
