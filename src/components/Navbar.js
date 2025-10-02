@@ -2,13 +2,18 @@ import { Navbar as BSNavbar, Nav, Container } from "react-bootstrap";
 
 export default function Navbar() {
   return (
-    <BSNavbar expand="lg" variant="dark" style={{ background: "#522c00ff" }} sticky="top">
-      <Container>
+    <BSNavbar
+      expand="lg"
+      variant="dark"
+      style={{ background: "#522c00ff", paddingTop: "0.2rem", paddingBottom: "0.2rem" }} // smaller container padding
+      sticky="top"
+    >
+      <Container className="navbar-container">
         <BSNavbar.Brand href="/">
           <img
             src="/logo192.png"
             alt="WeClean Logo"
-            height="80" // smaller size
+            height="90" // smaller size
             className="d-inline-block align-top"
           />
         </BSNavbar.Brand>
