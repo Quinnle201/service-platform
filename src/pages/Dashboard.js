@@ -10,7 +10,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchInquiries = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/inquiries");
+        const res = await axios.get("https://service-platform-backend-pi04.onrender.com/api/inquiries");
         setInquiries(res.data);
         setLoading(false);
       } catch (err) {
@@ -30,14 +30,22 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <Col md={10} className="p-4 bg-light vh-100 overflow-auto">
-        <h2 className="mb-4" style={{color:"#4B0082"}}>Customer Inquiries</h2>
+        <h2 className="mb-4" style={{ color: "#4B0082" }}>
+          Customer Inquiries
+        </h2>
 
         {loading ? (
           <div className="text-center my-5">
             <Spinner animation="border" variant="primary" />
           </div>
         ) : (
-          <Table striped bordered hover responsive className="shadow-sm bg-white rounded">
+          <Table
+            striped
+            bordered
+            hover
+            responsive
+            className="shadow-sm bg-white rounded"
+          >
             <thead className="table-dark">
               <tr>
                 <th>Name</th>
@@ -51,7 +59,9 @@ export default function Dashboard() {
             <tbody>
               {inquiries.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center">No inquiries yet.</td>
+                  <td colSpan={6} className="text-center">
+                    No inquiries yet.
+                  </td>
                 </tr>
               ) : (
                 inquiries.map((i) => (
@@ -62,7 +72,9 @@ export default function Dashboard() {
                     <td>{i.service || "-"}</td>
                     <td>{i.message}</td>
                     <td>
-                      <Badge bg={i.status === "pending" ? "warning" : "success"}>
+                      <Badge
+                        bg={i.status === "pending" ? "warning" : "success"}
+                      >
                         {i.status || "pending"}
                       </Badge>
                     </td>
@@ -76,4 +88,3 @@ export default function Dashboard() {
     </Row>
   );
 }
-

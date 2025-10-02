@@ -59,7 +59,7 @@ export default function Home() {
   const handleQuoteSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/inquiries", quote);
+      await axios.post( "https://service-platform-backend-pi04.onrender.com/api/inquiries", quote);
       alert("Quote request sent!");
       setQuote({ name: "", email: "", phone: "", service: "", message: "" });
     } catch (err) {
