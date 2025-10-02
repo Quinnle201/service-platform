@@ -6,7 +6,7 @@ export default function Navbar() {
       <Container>
         <BSNavbar.Brand href="/">
           <img
-            src="/WeClean.logo-bgremoved.png"
+            src="/logo192.png"
             alt="WeClean Logo"
             height="80" // smaller size
             className="d-inline-block align-top"
