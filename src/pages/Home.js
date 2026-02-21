@@ -322,19 +322,19 @@ export default function Home() {
                 <p>
                   <i className="bi bi-envelope-fill text-warning me-2"></i>
                   <a
-                    href="mailto:info@alimaid.com"
+                    href="mailto:quynhltnq201@gmail.com"
                     className="text-dark text-decoration-none"
                   >
-                    info@alimaid.com
+                    quynhltnq201@gmail.com
                   </a>
                 </p>
                 <p>
                   <i className="bi bi-telephone-fill text-warning me-2"></i>
                   <a
-                    href="tel:+14694652141"
+                    href="tel:+2149401291"
                     className="text-dark text-decoration-none"
                   >
-                    +1 (469) 465-2141
+                    +1 (214) 940-1291
                   </a>
                 </p>
               </div>
@@ -378,19 +378,19 @@ export default function Home() {
                 <p>
                   <i className="bi bi-telephone-fill text-warning me-2"></i>
                   <a
-                    href="tel:+14694652141"
+                    href="tel:+2149401291"
                     className="text-white text-decoration-none"
                   >
-                    +1 (469) 465-2141
+                    +1 (214) 940-1291
                   </a>
                 </p>
                 <p>
                   <i className="bi bi-envelope-fill text-warning me-2"></i>
                   <a
-                    href="mailto:info@alimaid.com"
+                    href="mailto:quynhltnq201@gmail.com"
                     className="text-white text-decoration-none"
                   >
-                    info@alimaid.com
+    quynhltnq201@gmail.com
                   </a>
                 </p>
               </Col>

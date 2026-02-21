@@ -26,8 +26,8 @@ export default function Navbar() {
             <Nav.Link href="#services">Cleaning Services</Nav.Link>
             <Nav.Link href="#quote">Get a Quote</Nav.Link>
             <Nav.Link href="#location">Locations</Nav.Link>
-            <Nav.Link href="tel:+14694652141" className="fw-bold text-warning">
-              Call: +1 (469) 465-2141
+            <Nav.Link href="tel:+2149401291" className="fw-bold text-warning">
+              Call: +1 (214) 940 -1291
             </Nav.Link>
           </Nav>
         </BSNavbar.Collapse>
